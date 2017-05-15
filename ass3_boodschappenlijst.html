@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Invoerlijst</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="beoordelingenlijst.js"></script>
+
+</head>
+<body>
+
+    Boodschap: <input type="text" id="inputList"/>
+    <button type="button" id="createList">Invoeren</button>
+
+    <div id="content">
+        <ul id="myList"></ul>
+    </div>
+
+<script>
+
+    document.getElementById('createList').addEventListener('click', function() {
+        document.getElementById("myList").innerHTML = "";
+        array = inputList.value.split(',');
+
+        for (i = 0; i < array.length; i++) {
+            var node = document.createElement("LI");
+            var textnode = document.createTextNode(array[i]);
+            node.appendChild(textnode);
+            document.getElementById("myList").appendChild(node);
+        }
+    });
+
+</script>
+
+</body>
+</html>
