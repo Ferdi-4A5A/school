@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+//    Definieer een functie met de naam bar. deze functie heeft een parameter sentence en de waarde daarvan wordt getoond in de console.
+//    De functie useBar heeft een parameter callback, die een callback functie kan bevatten. Deze callback functie word 3 keer aangeroepen in useBar.
+
+
+bar("hallo");
+
+
+    function useBar(callback) {
+        callback(1);
+        callback(2);
+        callback(3);
+    }
+
+    function bar(sentence) {
+        // TODO: print out sentence in the console
+        console.log(sentence);
+    }
+
+
+    useBar(bar);
+
+    // TODO: execute useCallback with the callback as the argument
+
+</script>
+
+</body>
+</html>
