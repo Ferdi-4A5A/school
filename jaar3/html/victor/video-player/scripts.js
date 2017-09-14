@@ -36,6 +36,7 @@ document.querySelector("[data-video='input-playbackRate']").addEventListener("cl
 document.querySelector("[data-video='input-playbackRate']").addEventListener("mousemove", playbackRate);
 document.querySelector("[data-skip='-10']").addEventListener("click", skipReturn10s);
 document.querySelector("[data-skip='25']").addEventListener("click", skipGo25s);
+document.querySelector("[data-video='video-player-complete']").addEventListener("dblclick", fullScreen);
 
 vid.addEventListener("timeupdate", function(){
     vidProgressBar.style.width = (vid.currentTime / vid.duration) * 100 + "%";
@@ -52,3 +53,30 @@ vidProgress.addEventListener("mousedown", function(){
 vidProgress.addEventListener("mouseup", function() {
     vidProgress.onmousemove = null;
 });
+
+function fullScreen() {
+    var elem = document.querySelector("[data-video='video-player-complete']");
+    if (document.fullScreen === false || document.webkitIsFullScreen === false || document.mozFullScreen === false) {
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+        } else if (elem.msRequestFullscreen) {
+            elem.msRequestFullscreen();
+        } else if (elem.mozRequestFullScreen) {
+            elem.mozRequestFullScreen();
+        } else if (elem.webkitRequestFullscreen) {
+            elem.webkitRequestFullscreen();
+        }
+        document.querySelector("[data-video='video-player-complete']").style.border = "0";
+    } else if (document.fullScreen || document.webkitIsFullScreen || document.mozFullScreen) {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        } else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+        } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+        }
+        document.querySelector("[data-video='video-player-complete']").style.border = "5px solid rgba(0,0,0,0.2)";
+    }
+}
