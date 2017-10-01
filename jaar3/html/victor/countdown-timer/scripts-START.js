@@ -18,14 +18,17 @@ for (var i = 0; i < elements.length; i++) {
             x = 1;
         });
     } else if (elements[i].getAttribute('data-time') == 'manual') {
-        elements[i].addEventListener("change", function() {
+        elements[i].addEventListener("keypress", function(event) {
             if (x === 1) {
                 clearInterval(timeLeftInterval);
             }
-            minutes = elements[5].value;
-            seconds = 0;
-            countTime(minutes, seconds);
-            x = 1;
+            if(event.keyCode === 13){
+                event.preventDefault();
+                minutes = elements[5].value;
+                seconds = 0;
+                countTime(minutes, seconds);
+                x = 1;
+            }
         });
     }
 }
