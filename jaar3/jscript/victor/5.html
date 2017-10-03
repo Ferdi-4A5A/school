@@ -6,34 +6,48 @@
 </head>
 <body>
 
+<ul data-ul="data-show-oddeven">
+    <li>A</li>
+    <li>B</li>
+    <li>C</li>
+    <li>D</li>
+    <li>E</li>
+    <li>F</li>
+    <li>G</li>
+</ul>
 
 <script>
-    // tel nummer 1+2 op en geef een result terug, tel daarna nummer 3+4 op, etc, de laatste apart als het oneven is
-    var numbers = [2, 6, 11, 5, 9, 8, 3, 46, 4];
-    var arrItem = 0;
 
+    // Show Odd Even
+    listItems = document.querySelectorAll("[data-ul='data-show-oddeven'] li");
+    listItems.forEach(myFunction);
 
-
-    // als de lengte van de array hetzelfde is als
     function myFunction(value, index, arr) {
-//        console.log(arr[arrItem] + arr[arrItem+1]);
-//        console.log(arrItem);
-//        arrItem += 2;
-//
-//        if (arr[arrItem] === 8) {
-//            console.log(arrItem[8]);
-//        }
-        console.log(arr.length);
-        console.log(index[arr.length]);
-        console.log(index % 2);
+        if (index % 2 == 0) {
+            listItems[index].title = 'odd';
+        }
+        else if (index % 2 == 1) {
+            listItems[index].title = 'even';
+        }
     }
 
+    // Add Up Next
+    var numbers = [2, 6, 11, 5, 9, 8, 3, 46, 4];
+    numbers.forEach(myFunctionn);
 
-    numbers.forEach(myFunction);
+    function myFunctionn(value, index, arr) {
+        var first = index * 2;
+        var second = first + 1;
 
-
+        if (!isNaN(arr[first] + arr[second])) {
+            console.log("Item " + index + " = " + (arr[first] + arr[second]));
+        } else if (arr.length % 2 == 1 && index === Math.ceil(arr.length / 2)) {
+            console.log("Item " + (index-1) + " = " + arr[arr.length-1]);
+        }
+    }
 
 </script>
+
 
 </body>
 </html>
