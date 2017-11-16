@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="utf-8">
+    <title>Git Wizard Tool</title>
+    <link rel="stylesheet" type="text/css" href="git-wizard.css">
+</head>
+<body>
+
+   <div class="container">
+        <h1>Git Wizard Tool</h1>
+        <textarea id="tempTextArea" style="display:none;"></textarea>
+        <div class="steps">
+            <!--Steps are loaded by ajax-->
+        </div>
+
+        <div class="buttons">
+            <button id="previousStep" data-load-previous>&lt;&lt; Vorige stap</button>
+            <button id="nextStep" data-load-next>Volgende stap &gt;&gt;</button>
+        </div>
+    </div>
+
+    <script>
+
+        var xhr = new XMLHttpRequest();
+
+        xhr.addEventListener("load", ajaxLoad);
+        xhr.addEventListener("error", ajaxError);
+
+        function ajaxLoad(event) {
+           if (this.status === 200) {
+               console.log(this.responseText);   // this === xhr
+           } else {
+               console.log("unsuccessful request");
+           }
+        }
+
+        function ajaxError(event) {
+           console.log('error');
+        }
+
+        document.querySelectorAll("[data-load-previous]")[0].disabled = true;
+        currentPage = 1;
+
+        xhr.open("GET", "stap" + currentPage + ".html");
+        xhr.send();
+        xhr.addEventListener("load", loadPage);
+
+        document.querySelector("[data-load-next]").addEventListener("click", function () {
+            currentPage++;
+            if (currentPage > 3) {
+                document.querySelectorAll("[data-load-next]")[0].disabled = true;
+            } else if (currentPage == 2) {
+                document.querySelectorAll("[data-load-previous]")[0].disabled = false;
+            }
+            xhr.open("GET", "stap" + currentPage + ".html");
+            xhr.send();
+            xhr.addEventListener("load", loadPage);
+        });
+
+        document.querySelector("[data-load-previous]").addEventListener("click", function () {
+           currentPage--;
+           if (currentPage == 1) {
+               document.querySelectorAll("[data-load-previous]")[0].disabled = true;
+           } else if (currentPage <= 3) {
+               document.querySelectorAll("[data-load-next]")[0].disabled = false;
+           }
+           xhr.open("GET", "stap" + currentPage + ".html");
+           xhr.send();
+           xhr.addEventListener("load", loadPage);
+        });
+
+        function loadPage() {
+            document.getElementsByClassName('steps')[0].innerHTML = xhr.responseText;
+            var textArea = document.getElementById('tempTextArea');
+
+           if (currentPage == 1) {
+                document.getElementById('folder').addEventListener("keyup", function () {
+                   document.querySelectorAll("[data-copy]")[0].innerHTML = "cd " + document.getElementById('folder').value;
+                });
+
+                document.getElementById('cloneUrl').addEventListener("keyup", function () {
+                   document.querySelectorAll("[data-copy]")[1].innerHTML = "git clone " + document.getElementById('cloneUrl').value;
+                });
+
+                document.getElementById('zoekFolderCommando').addEventListener("click", function () {
+                    copyToClipboard(document.getElementById('zoekFolderCommando').innerText);
+                });
+               document.getElementById('cloneCommand').addEventListener("click", function () {
+                   copyToClipboard(document.getElementById('cloneCommand').innerText);
+               });
+           } else if (currentPage == 2) {
+               document.getElementById('commitComment').addEventListener("keyup", function () {
+                   document.querySelectorAll("[data-copy]")[2].innerHTML = "git commit -a -m " + '"' + document.getElementById('commitComment').value + '"';
+               });
+               document.getElementById('commitCommand').addEventListener("click", function () {
+                   copyToClipboard(document.getElementById('commitCommand').innerText);
+               });
+           }
+            function copyToClipboard(text) {
+                textArea.style.display = "block";
+                textArea.innerHTML = text;
+                textArea.select();
+                document.execCommand("Copy");
+                textArea.style.display = "none";
+            }
+        }
+
+    </script>
+
+</body>
+</html>
