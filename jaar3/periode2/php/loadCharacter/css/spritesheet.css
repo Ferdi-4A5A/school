@@ -1,0 +1,22 @@
+.lol {
+    display: block;
+    background: url(../img/sprite-league-of-legends.png) 0 0;
+}
+.LoLChar1 {
+    border: solid black 1px;
+    width: 184px;
+    height: 205px;
+    background-position: 458px 10px;
+}
+.LoLChar2 {
+    border: solid black 1px;
+    width: 184px;
+    height: 205px;
+    background-position: -3px -19px;
+}
+.LoLChar3 {
+    border: solid black 1px;
+    width: 184px;
+    height: 205px;
+    background-position: 194px 168px;
+}
