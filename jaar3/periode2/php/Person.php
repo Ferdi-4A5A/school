@@ -24,7 +24,7 @@ class Person
     }
 
     public function getAge($age) {
-        $this->age = $age;
+        return $age;
     }
 
     public function adultOrNot() {
