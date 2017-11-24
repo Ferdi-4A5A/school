@@ -4,6 +4,8 @@
 // Met private $variable kan je ervoor zorgen dat een variable buiten een functie niet aangepast kan worden
 // Met protected $variable kan je ervoor zorgen dat een variable in zijn eigen class en subclasses aangepast kan worden
 
+// gebruik abstract in hoofdfunctie en ga in child classes dezelfde functie benoemen voor die class
+
 class User
 {
     private $username = null;
@@ -12,6 +14,10 @@ class User
     public function __construct($username, $password) {
         $this->username = $username;
         $this->setPassword($password);
+    }
+
+    public function doStuff() {
+
     }
 
     public function setPassword($password) {
@@ -40,14 +46,14 @@ class User
 
 class UserSupervisor extends User
 {
-    public function doSuperviserStuff() {
+    public function doStuff() {
 
     }
 }
 
 class UserNormal extends User
 {
-    public function doNormalUserStuff() {
+    public function doStuff() {
 
     }
 }
