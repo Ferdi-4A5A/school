@@ -54,8 +54,12 @@ class UserNormal extends User
     }
 }
 
-$user = new User('Sjaak', 'asdf');
+$user = new User('tomas', 'legend32');
 var_dump($user->getPassword());
-var_dump($user->checkPassword('asdf'));
-//$user->setPassword('asdf');
-//var_dump($user->getPassword());
+$user->setPassword('legend32');
+var_dump($user->checkPassword('legend32'));
+
+$user = new User('anna', 'whatevah96');
+var_dump($user->getPassword());
+$user->setPassword('whatevah96');
+var_dump($user->checkPassword('whatevah96'));
