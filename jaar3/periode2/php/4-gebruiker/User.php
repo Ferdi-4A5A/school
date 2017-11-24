@@ -6,8 +6,8 @@
 
 class User
 {
-    private $username = null;
-    private $password = null;
+    protected $username = null;
+    protected $password = null;
 
     public function __construct($username, $password) {
         $this->username = $username;
