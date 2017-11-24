@@ -1,0 +1,61 @@
+<?php
+
+// __contruct word aangeroepen als new Object() word aangeroepen, new Object() kan je dan parameters meegeven die in contructor worden aangemaakt
+// Met private $variable kan je ervoor zorgen dat een variable buiten een functie niet aangepast kan worden
+// Met protected $variable kan je ervoor zorgen dat een variable in zijn eigen class en subclasses aangepast kan worden
+
+// gebruik abstract in hoofdfunctie en ga in child classes dezelfde functie benoemen voor die class
+
+class User
+{
+    private $username = null;
+    private $password = null;
+
+    public function __construct($username, $password) {
+        $this->username = $username;
+        $this->setPassword($password);
+    }
+
+    public function setPassword($password) {
+        $this->password = password_hash($password, PASSWORD_DEFAULT);
+    }
+
+//    gaat niet hé abstract class als je de hoofdclass moet aanroepen om een User aan te maken..
+//    abstract public function doStuff();
+
+    public function checkPassword($password) {
+        if (password_verify($password, $this->password)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getUsername() {
+        return $this->username;
+    }
+
+    public function getPassword() {
+        return $this->password;
+    }
+}
+
+class UserSupervisor extends User
+{
+    public function doSuperviserStuff() {
+
+    }
+}
+
+class UserNormal extends User
+{
+    public function doNormalUserStuff() {
+
+    }
+}
+
+$user = new User('Sjaak', 'asdf');
+var_dump($user->getPassword());
+var_dump($user->checkPassword('asdf'));
+//$user->setPassword('asdf');
+//var_dump($user->getPassword());
