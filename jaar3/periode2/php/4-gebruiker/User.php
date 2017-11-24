@@ -4,8 +4,6 @@
 // Met private $variable kan je ervoor zorgen dat een variable buiten een functie niet aangepast kan worden
 // Met protected $variable kan je ervoor zorgen dat een variable in zijn eigen class en subclasses aangepast kan worden
 
-// gebruik abstract in hoofdfunctie en ga in child classes dezelfde functie benoemen voor die class
-
 class User
 {
     private $username = null;
